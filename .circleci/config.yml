@@ -4,11 +4,11 @@ jobs:
     docker:
       - image: centos:centos6
     steps:
-      - run:
-          name: Which Git?
-          command: |
-            git --version
-            which git
+#       - run:
+#           name: Which Git?
+#           command: |
+#             git --version
+#             which git
       - run:
           name: Environment?
           command: env
