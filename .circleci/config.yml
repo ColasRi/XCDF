@@ -40,8 +40,9 @@ jobs:
           command: |
             cd build
             pwd
-            ls
+            ls -al
             for TEST in $(ls *-test); do echo "Running test $TEST"; eval $TEST; done
+            ls -al
             pip install pyyaml cpp-coveralls
             echo "### Installed cpp-coveralls"
             coveralls --exclude src/test --gcov-options '\-lp'
