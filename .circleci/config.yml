@@ -20,6 +20,10 @@ jobs:
             env | sort
             ls -al
       - run:
+          name: Install CMake
+          command: |
+            yum install cmake
+      - run:
           name: CMake Make
           command: |
             mkdir build
