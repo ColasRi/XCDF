@@ -43,8 +43,11 @@ jobs:
             ls
             for TEST in $(ls *-test); do echo "Running test $TEST"; eval $TEST; done
             pip install pyyaml cpp-coveralls
+            echo "### Installed cpp-coveralls"
             coveralls --exclude src/test --gcov-options '\-lp'
+            echo "### Ran coveralls"
             pip install codecov
+            echo "### Installed codecov"
             export CODECOV_TOKEN="5ddaa55d-ebc0-4fa7-b654-688e02a439db"
             . get_code_cov.sh
             codecov
