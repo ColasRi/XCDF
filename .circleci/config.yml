@@ -20,24 +20,27 @@ jobs:
             env | sort
             ls -al
       - run:
-          name: CMake
+          name: CMake Make
           command: |
-            cd /root/project
-            cmake . -DCMAKE_BUILD_TYPE=DEBUG
+            mkdir build
+            cd build
+            cmake -DCMAKE_INSTALL_PREFIX=../install ..
+            make
       - run:
-          name: Make
+          name: Tests
           command: |
-            cd /root/project
-            make -j3
-      - run:
-          name: Tests and coverage
-          command: |
-            cd /root/project
-            make test
-            ./MyProject
-            pip install pyyaml cpp-coveralls
-            coveralls --exclude src/test --gcov-options '\-lp'
-            pip install codecov
-            export CODECOV_TOKEN="dc9d0a0d-f97f-4256-888e-c32cca547bca"
-            . get_code_cov.sh
-            codecov
+            pwd
+            ls
+            for TEST in $(ls *-test); do echo "Running test $TEST"; eval $TEST; done
+#       - run:
+#           name: Tests and coverage
+#           command: |
+#             cd /root/project
+#             make test
+#             ./MyProject
+#             pip install pyyaml cpp-coveralls
+#             coveralls --exclude src/test --gcov-options '\-lp'
+#             pip install codecov
+#             export CODECOV_TOKEN="dc9d0a0d-f97f-4256-888e-c32cca547bca"
+#             . get_code_cov.sh
+#             codecov
