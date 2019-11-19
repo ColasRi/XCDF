@@ -33,6 +33,26 @@ IF (COMMAND cmake_policy)
   ENDIF()
 ENDIF (COMMAND cmake_policy)
 
+# -----------------------------------------------------------------------------
+# Configuration for code coverage
+# -----------------------------------------------------------------------------
+OPTION (ENABLE_GCOV "Enable gcov code coverage (for gcc), use with " OFF)
+
+IF (ENABLE_GCOV)
+  INCLUDE(CheckCXXCompilerFlag)
+  CHECK_CXX_COMPILER_FLAG(-ftest-coverage SUPPORTS_COVERAGE)
+  IF (SUPPORTS_COVERAGE)
+    SET(GCC_COVERAGE_COMPILE_FLAGS "-fprofile-arcs -ftest-coverage")
+    SET(GCC_COVERAGE_LINK_FLAGS "-lgcov")
+    SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
+    SET(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINK_FLAGS}")
+    MESSAGE ("Enabling gcov coverage.")
+  ELSE ()
+    MESSAGE ("gcov coverage requested but not available.")
+    MESSAGE (FATAL_ERROR "Aborting...")
+  ENDIF ()
+ENDIF ()
+
 # ------------------------------------------------------------------------------
 # Release information
 # ------------------------------------------------------------------------------
