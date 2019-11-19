@@ -1,0 +1,43 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: centos:centos6
+    steps:
+      - run:
+          name: Which Git?
+          command: |
+            git --version
+            which git
+      - run:
+          name: Environment?
+          command: env
+      - checkout
+      - run:
+          name: Get some info...
+          command: |
+            pwd
+            env | sort
+            ls -al
+      - run:
+          name: CMake
+          command: |
+            cd /root/project
+            cmake . -DCMAKE_BUILD_TYPE=DEBUG
+      - run:
+          name: Make
+          command: |
+            cd /root/project
+            make -j3
+      - run:
+          name: Tests and coverage
+          command: |
+            cd /root/project
+            make test
+            ./MyProject
+            pip install pyyaml cpp-coveralls
+            coveralls --exclude src/test --gcov-options '\-lp'
+            pip install codecov
+            export CODECOV_TOKEN="dc9d0a0d-f97f-4256-888e-c32cca547bca"
+            . get_code_cov.sh
+            codecov
