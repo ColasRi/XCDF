@@ -1,15 +1,8 @@
+[![CodeFactor](https://www.codefactor.io/repository/github/colasri/xcdf/badge)](https://www.codefactor.io/repository/github/colasri/xcdf)
 
-XCDF: The eXplicitly Compacted Data Format
---------------------------------------------------------------------------------
+# XCDF: The eXplicitly Compacted Data Format
 
-I.   Overview
-II.  Description
-  A. Bit Packing
-  B. XCDF
-
---------------------------------------------------------------------------------
-
-I. Overview
+## Overview
 
   The eXplicitly Compacted Data Format (XCDF) is written and maintained by Jim
   Braun at the University of Maryland.  XCDF is a binary data format designed
@@ -20,9 +13,9 @@ I. Overview
   Python bindings for XCDF are written and maintained by Segev BenZvi at the
   University of Wisconsin-Madison.
 
-II. Description
+## Description
 
-  A. Bit Packing
+### Bit Packing
 
   Bit-packing is the process of compressing data by reducing the number of bits
   needed to represent data values, then packing those bits serially for each
@@ -46,11 +39,13 @@ II. Description
 
   1. Changes to the data format require significant updates to data readers, as
      well as a data versioning scheme. Examples:
-    a) Suppose one later improves the experiment and needs to write data in
-       0.05 degree bins. This requires adding one bit to both the azimuth and
-       zenith fields.
-    b) Suppose a new field (e.g. energy) is added. Now three fields are written
-       sequentially for each event (zenith,azimuth,energy).
+     
+     a) Suppose one later improves the experiment and needs to write data in
+        0.05 degree bins. This requires adding one bit to both the azimuth and
+        zenith fields.
+        
+     b) Suppose a new field (e.g. energy) is added. Now three fields are written
+        sequentially for each event (zenith,azimuth,energy).
 
   2. The maximum and minimum values of each data field must be specified.
 
@@ -58,7 +53,7 @@ II. Description
   data and data readers, and by dynamically calculating maximum and minimum
   field values as data are written.
 
-  B. XCDF
+### XCDF
 
   XCDF stores groups of fields that have a common index (nTuples). Each index
   is referred to as an event. Data fields are added to the file by specifying a
