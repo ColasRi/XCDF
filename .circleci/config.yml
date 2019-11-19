@@ -2,7 +2,12 @@ version: 2
 jobs:
   build:
     docker:
-      - image: centos:centos6
+#       - image: centos:centos6
+      - image: hawcobservatory/hawcbuild:c-6scl
+        environment:
+          PATH: "/opt/rh/rh-git29/root/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+        entrypoint: /entrypoint.sh
+        command: /bin/bash
     steps:
 #       - run:
 #           name: Which Git?
@@ -19,10 +24,10 @@ jobs:
             pwd
             env | sort
             ls -al
-      - run:
-          name: Install CMake
-          command: |
-            yum install cmake gcc --assumeyes
+#       - run:
+#           name: Install CMake
+#           command: |
+#             yum install cmake gcc --assumeyes
       - run:
           name: CMake Make
           command: |
