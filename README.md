@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/colasri/XCDF.svg?style=svg)](https://circleci.com/gh/colasri/XCDF)
 [![CodeFactor](https://www.codefactor.io/repository/github/colasri/xcdf/badge)](https://www.codefactor.io/repository/github/colasri/xcdf)
 
 # XCDF: The eXplicitly Compacted Data Format
